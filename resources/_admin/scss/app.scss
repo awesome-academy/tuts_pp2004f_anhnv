@@ -1,0 +1,58 @@
+.navbar-nav > li.user-menu {
+    & > a {
+        padding: 10px 5px 40px 15px;
+    }
+    img.user-image {
+        width: 36px;
+        height:36px;
+    }
+}
+
+.main-header {
+    .breadcrumb {
+        padding: 12px;
+        margin: 0;
+        float: left;
+        background-color: transparent;
+        font-size: 1.6rem;
+        li {
+            color: #DDD;
+            [class*=skin-black] & {
+                color: #888;
+            }
+        }
+        a, i {
+            color: white;
+            [class*=skin-black] & {
+                color: #222;
+            }
+        }
+    }
+}
+
+.help-block::before {
+    content: "* ";
+    display: inline-block;
+    font-weight: 800;
+}
+
+
+table.dataTable thead {
+    .sorting_asc, .sorting_desc {
+        box-shadow: 0 -2px #12b5e6!important;
+    }
+    [class*=sorting]::after {
+        font-family: 'FontAwesome';
+    }
+    .sorting::after {
+        content: "\f0dc";
+    }
+    .sorting_asc::after {
+        content: "\f160";
+        color: #222;
+    }
+    .sorting_desc::after {
+        content: "\f161";
+        color: #222;
+    }
+}
