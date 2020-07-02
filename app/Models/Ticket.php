@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends Model
 {
@@ -14,4 +15,7 @@ class Ticket extends Model
         'slug',
         'status'
     ];
+
+    use SoftDeletes;
+    protected $date = ['deleted_at'];
 }

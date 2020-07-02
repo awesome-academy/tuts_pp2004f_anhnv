@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->as('admin.')->group(function(){
+    Route::get('/', 'AdminController@dashboard');
+
+    Route::get('tickets/trash', 'TicketController@trash')->name('tickets.trash');
+    Route::get('tickets/{ticket}/delete', 'TicketController@delete')->name('tickets.delete');
+    Route::resource('tickets', 'TicketController');
+});
