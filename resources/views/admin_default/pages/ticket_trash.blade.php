@@ -18,21 +18,20 @@
                                 <th>Content</th>
                                 <th width="15%">User</th>
                                 <th width="140px">Created At</th>
-                                <th width="240px">Action</th>
+                                <th width="150px">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($tickets as $ticket)
                             <tr>
                                 <td></td>
-                                <td><a href="{{ route('admin.tickets.show', $ticket->id) }}" title="Click to view details">{{ $ticket->title }}</a></td>
+                                <td><a href="{{ route('admin.tickets.showTrashed', $ticket->id) }}" title="Click to view details">{{ $ticket->title }}</a></td>
                                 <td>{{ $ticket->content }}</td>
                                 <td></td>
                                 <td>{{ date_format($ticket->created_at, 'H:i a - d/m/Y') }}</td>
                                 <td>
-                                    <a href="{{ route('admin.tickets.show', $ticket->id) }}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
-                                    <a href="{{ route('admin.tickets.edit', $ticket->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                    <a href="{{ route('admin.tickets.delete', $ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                    <a href="{{ route('admin.tickets.showTrashed', $ticket->id) }}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
+                                    <a href="{{ route('admin.tickets.editTrashed', $ticket->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                 </td>
                             </tr>
                             @endforeach

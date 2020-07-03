@@ -21,6 +21,10 @@ Route::prefix('admin')->as('admin.')->group(function(){
     Route::get('/', 'AdminController@dashboard');
 
     Route::get('tickets/trash', 'TicketController@trash')->name('tickets.trash');
+    Route::get('tickets/{ticket}/showTrashed', 'TicketController@showTrashed')->name('tickets.showTrashed');
+    Route::get('tickets/{ticket}/editTrashed', 'TicketController@editTrashed')->name('tickets.editTrashed');
+    Route::match(['put', 'patch'], 'ticket/{ticket}/updateTrashed', 'TicketController@updateTrashed')->name('tickets.updateTrashed');
+    Route::match(['put', 'patch'], 'ticket/{ticket}/restore', 'TicketController@restore')->name('tickets.restore');
     Route::get('tickets/{ticket}/delete', 'TicketController@delete')->name('tickets.delete');
     Route::resource('tickets', 'TicketController');
 });
