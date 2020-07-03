@@ -83,13 +83,13 @@ class TicketController extends Controller
      */
     public function update(TicketFormRequest $request, $id)
     {
-        $validator = $request->validated();
+        $request->validated();
 
         try {
             $ticket = Ticket::find($id)->fill($request->all());
-            $save = $ticket->save();
-        } catch(\Exception $exp) {
-            Log.info('aaa');
+            $ticket->save();
+        } catch(\Exception $e) {
+            
         }
 
         return redirect()->route('admin.tickets.show', $id)
@@ -104,30 +104,68 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ticket = Ticket::withTrashed()->find($id);
+
+        try {
+            $ticket->forceDelete();
+            throw new \Exception('Ko the xoa ticket nay');
+        } catch(\Exception $e) {
+            
+        }
+        return redirect()->route('admin.tickets.trash');
     }
 
     public function trash()
     {
-        $tickets_trash = Ticket::onlyTrashed()->get();
+        $tickets = Ticket::onlyTrashed()->get();
 
-        return view('admin_default.pages.ticket_trash', compact('tickets_trash'));
+        return view('admin_default.pages.ticket_trash', compact('tickets'));
     }
 
     public function delete($id)
     {
         $ticket = Ticket::find($id)->delete();
         
-        if ($ticket->trashed()) {
+        if (Ticket::withTrashed()->find($id)) {
             return redirect()->route('admin.tickets.index')
                 ->withMessage('Congrats! You have sent a ticket to trash successfully');
         }
     }
 
-    public function restore($id) {
-        $ticket = Ticket::find($id)->restore();
+    public function showTrashed($id)
+    {
+        $ticket = Ticket::withTrashed()->find($id);
 
-        if ($ticket->restored()) {
+        return view('admin_default.pages.ticket_details', compact('ticket'));
+    }
+
+    public function editTrashed($id)
+    {
+        $ticket = Ticket::withTrashed()->find($id);
+
+        return view('admin_default.pages.ticket_edit', compact('ticket'));
+    }
+
+    public function updateTrashed(TicketFormRequest $request, $id)
+    {
+        $request->validated();
+
+        try {
+            $ticket = Ticket::withTrashed()->find($id)->fill($request->all());
+            $ticket->save();
+        } catch(\Exception $e) {
+
+        }
+        
+        return redirect()->route('admin.tickets.showTrashed', $id)
+            ->withMessage('You have updated a ticket successfully!');
+    }
+
+    public function restore($id)
+    {
+        $ticket = Ticket::withTrashed()->find($id)->restore();
+
+        if (Ticket::withoutTrashed()->find($id)) {
             return redirect()->route('admin.tickets.index')
                 ->withMessage('Congrats! You have restored a ticket successfully');
         }

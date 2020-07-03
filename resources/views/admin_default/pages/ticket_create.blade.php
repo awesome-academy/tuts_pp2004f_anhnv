@@ -7,7 +7,7 @@
         <div class="col-sm-6">
             <div class="box box-success">
                 <div class="box-header">
-                    <h3 class="text-center">Create New Ticket</h3>
+                    <h3>Create New Ticket</h3>
                 </div>
                 <div class="box-body">
                     {!! Form::open(['route' => 'admin.tickets.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
