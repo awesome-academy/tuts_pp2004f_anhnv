@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -45,6 +46,12 @@ class TicketController extends Controller
         $save = $ticket->save();
 
         if ($save) {
+            Mail::send('emails.ticket_created', ['ticket' => $ticket['slug']], function($message){
+                $message->from('vietanh.dev88@gmail.com', 'Laravel Ticket Manager App');
+                $message->to('wetagik475@frost2d.net')->subject('Hi! There is a new ticket created');
+                // go to https://temp-mail.org/vi for test with this email address
+            });
+
             return redirect()->route('admin.tickets.index')
                 ->withMessage('Congrats! You have created a ticket successfully');
         }
@@ -87,6 +94,7 @@ class TicketController extends Controller
 
         try {
             $ticket = Ticket::find($id)->fill($request->all());
+            $ticket->status = $request->status ? 0 : 1;
             $ticket->save();
         } catch(\Exception $e) {
             
@@ -152,6 +160,7 @@ class TicketController extends Controller
 
         try {
             $ticket = Ticket::withTrashed()->find($id)->fill($request->all());
+            $ticket->status = $ticket->status ? 0 : 1;
             $ticket->save();
         } catch(\Exception $e) {
 

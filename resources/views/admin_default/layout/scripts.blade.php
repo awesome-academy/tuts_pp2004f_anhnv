@@ -35,7 +35,7 @@
 <script src="{{ asset('plugins/fastclick/lib/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('_admin/js/admin.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('_admin/js/dashboard.js') }}"></script>
+{{-- <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('_admin/js/dashboard.js') }}"></script> --}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('_admin/js/demo.js') }}"></script>
