@@ -33,6 +33,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('Status', NULL, ['class' => 'col-sm-4 control-label']) !!}
+                            <div class="col-sm-8">
+                                {{ Form::text('status', $ticket->status ? 'Pending': 'Answered', ['class' => 'form-control', 'readonly' => true]) }}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-4">
                                 @if ($ticket->trashed())
                                     <label class="btn btn-primary" for="btn-restore-ticket"><i class="fa fa-refresh"></i> Restore</label>

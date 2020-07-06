@@ -29,6 +29,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-4">
+                                <label for="">
+                                    {{ Form::checkbox('status', NULL, ['class' => 'form-control', 'checked' => $ticket->status ? '' : true]) }} Close this ticket?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-4">
                                 <button type="submit" class="btn btn-warning"><i class="fa fa-save"></i> Update</button>
                                 @if (!$ticket->trashed())
                                     <a href="{{ route('admin.tickets.delete', $ticket->id) }}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
