@@ -5,9 +5,6 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            @if (Session::has('message'))
-                @include('admin_default.partials.message')
-            @endif
             <div class="box box-warning">
                 <div class="box-header">
                     <h3>Ticket List</h3>
@@ -26,12 +23,14 @@
                         </thead>
                         <tbody>
                             @foreach($tickets as $ticket)
-                            <tr>
+                            <tr class="{{ Session::get('ticket') == $ticket->id ? 'new-item' : '' }}">
                                 <td></td>
-                                <td><a href="{{ route('admin.tickets.show', $ticket->id) }}" title="Click to view details">{{ $ticket->title }}</a></td>
+                                <td>@if(Session::get('ticket') == $ticket->id) <i class="fa fa-check"></i>@endif
+                                    <a href="{{ route('admin.tickets.show', $ticket->id) }}" title="Click to view details">{{ $ticket->title }}</a>
+                                </td>
                                 <td>{{ $ticket->content }}</td>
                                 <td></td>
-                                <td>{{ date_format($ticket->created_at, 'H:i a - d/m/Y') }}</td>
+                                <td>{{ date_format($ticket->created_at, ' d/m/Y - H:i a') }}</td>
                                 <td>
                                     <a href="{{ route('admin.tickets.show', $ticket->id) }}" class="btn btn-default"><i class="fa fa-eye"></i> View</a>
                                     <a href="{{ route('admin.tickets.edit', $ticket->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>

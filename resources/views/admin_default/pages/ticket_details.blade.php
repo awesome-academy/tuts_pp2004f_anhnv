@@ -5,9 +5,6 @@
 @section('content')
     <div class="row">
         <div class="col-sm-6">
-            @if (Session::has('message'))
-                @include('admin_default.partials.message')
-            @endif
             <div class="box box-info">
                 <div class="box-header">
                     <h3>Ticket Details</h3>
@@ -35,9 +32,9 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-4">
                                 @if ($ticket->trashed())
-                                    <label class="btn btn-primary" for="btn-restore-ticket"><i class="fa fa-refresh"></i> Restore</label>
+                                    <label class="btn btn-primary btn-restore-ticket" for="btn-restore-ticket"><i class="fa fa-refresh"></i> Restore</label>
                                     <a href="{{ route('admin.tickets.editTrashed', $ticket->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
-                                    <label class="btn btn-danger" for="btn-destroy-ticket"><i class="fa fa-ban"></i> Remove</label>
+                                    <label class="btn btn-danger btn-delete-ticket" for="btn-destroy-ticket"><i class="fa fa-ban"></i> Delete</label>
                                     <a href="{{ route('admin.tickets.trash') }}" class="btn btn-default"><i class="fa fa-list"></i> Back to Trash</a>
                                 @else
                                     <a href="{{ route('admin.tickets.edit', $ticket->id) }}" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
@@ -49,11 +46,11 @@
                     {!! Form::close() !!}
                     
                     @if ($ticket->trashed())
-                        {!! Form::open(['route' => ['admin.tickets.destroy', $ticket->id], 'method' => 'DELETE']) !!}
+                        {!! Form::open(['route' => ['admin.tickets.destroy', $ticket->id], 'method' => 'DELETE', 'id' => 'form-delete-ticket']) !!}
                             <input type="submit" class="hidden" id="btn-destroy-ticket">
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => ['admin.tickets.restore', $ticket->id], 'method' => 'PATCH']) !!}
+                        {!! Form::open(['route' => ['admin.tickets.restore', $ticket->id], 'method' => 'PATCH', 'id' => 'form-restore-ticket']) !!}
                             <input type="submit" class="hidden" id="btn-restore-ticket">
                         {!! Form::close() !!}
                     @endif
@@ -62,3 +59,64 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <div id="modal-confirm-delete" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Please Confirm </h4>
+            </div>
+            <div class="modal-body">
+                Do you really want to delete this Ticket?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirm-delete" type="button" class="btn btn-danger"><i class="fa fa-ban"></i> Yes, Delete it!</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-confirm-restore" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Please Confirm </h4>
+            </div>
+            <div class="modal-body">
+                Do you really want to restore this Ticket?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-confirm-restore" type="button" class="btn btn-primary"><i class="fa fa-ban"></i> Yes, restore it!</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $('.btn-delete-ticket').click(function(event){
+        event.preventDefault();
+        $('#modal-confirm-delete').modal({
+            show: true,
+            backdrop: 'static'
+        });
+        $('#btn-confirm-delete').click(function(){
+            $('#form-delete-ticket').submit();
+        });
+    });
+
+    $('.btn-restore-ticket').click(function(event){
+        event.preventDefault();
+        $('#modal-confirm-restore').modal({
+            show: true,
+            backdrop: 'static'
+        })
+        $('#btn-confirm-restore').click(function(){
+            $('#form-restore-ticket').submit();
+        });
+    });
+</script>
+@endpush

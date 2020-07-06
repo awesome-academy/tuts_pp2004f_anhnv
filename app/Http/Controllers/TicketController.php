@@ -15,7 +15,7 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::take(10)->get();
+        $tickets = Ticket::paginate(50);
 
         return view('admin_default.pages.ticket_index', compact('tickets'));
     }
@@ -46,7 +46,8 @@ class TicketController extends Controller
 
         if ($save) {
             return redirect()->route('admin.tickets.index')
-                ->withMessage('Congrats! You have created a ticket successfully');
+                ->withMessage('Congrats! You have created a ticket successfully')
+                ->withTicket($ticket->id);
         }
     }
 
@@ -112,7 +113,8 @@ class TicketController extends Controller
         } catch(\Exception $e) {
             
         }
-        return redirect()->route('admin.tickets.trash');
+        return redirect()->route('admin.tickets.trash')
+            ->withMessage('You have deleted a ticket successfully');
     }
 
     public function trash()

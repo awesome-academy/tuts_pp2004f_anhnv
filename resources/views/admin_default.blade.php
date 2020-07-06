@@ -22,5 +22,9 @@
 
   @include('admin_default.layout.scripts')
   @stack('js')
+
+  @if(Session::has('message'))
+    @include('admin_default.partials.message')
+  @endif
 </body>
 </html>
