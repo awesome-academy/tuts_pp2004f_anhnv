@@ -17,7 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->as('admin.')->group(function(){
+Route::prefix('admin')->as('admin.')->middleware('admin_auth')->group(function(){
+    Auth::routes();
+
     Route::get('/', 'AdminController@dashboard');
 
     Route::get('tickets/trash', 'TicketController@trash')->name('tickets.trash');
