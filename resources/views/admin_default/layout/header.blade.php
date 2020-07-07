@@ -97,7 +97,10 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  {!! Form::open(['route' => 'admin.logout', 'method' => 'POST']) !!}
+                    <button id="btn-logout" type="submit" class="hidden">Logout</button>
+                  {!! Form::close() !!}
+                  <label for="btn-logout" class="btn btn-default btn-flat">Sign out</label>
                 </div>
               </li>
             </ul>

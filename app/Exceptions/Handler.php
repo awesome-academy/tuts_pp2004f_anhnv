@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Auth;
 
 class Handler extends ExceptionHandler
 {
@@ -54,7 +55,11 @@ class Handler extends ExceptionHandler
 
             if (request()->is('admin/*')) {
                 if ($exception->getStatusCode() == 404) {
-                    return response()->view('admin_default.errors.404', [], 404);
+                    if(Auth::check()){
+                        return response()->view('admin_default.errors.404', [], 404);
+                    } else {
+                        return response()->view('errors.404', [], 404);
+                    }
                 }
             }
             else
