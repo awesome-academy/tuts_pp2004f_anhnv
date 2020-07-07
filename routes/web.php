@@ -19,7 +19,12 @@ Route::get('/', function () {
 
 Route::prefix('admin')->as('admin.')->middleware('admin_auth')->group(function(){
     Auth::routes();
-
+    Route::fallback(function(){ 
+        if(Auth::check()){
+            return response()->view('admin_default.errors.404', [], 404); 
+        }
+    });
+    
     Route::get('/', 'AdminController@dashboard');
 
     Route::get('tickets/trash', 'TicketController@trash')->name('tickets.trash');
