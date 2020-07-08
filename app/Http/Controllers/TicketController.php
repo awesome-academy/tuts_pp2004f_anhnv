@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TicketFormRequest;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -41,16 +42,22 @@ class TicketController extends Controller
     {
         $validator = $request->validated();
 
+        $request['slug'] = uniqid();
+        $request['user_id'] = Auth::user()->id;
         $ticket = Ticket::create($request->all());
-        $ticket['slug'] = uniqid();
+        
         $save = $ticket->save();
 
         if ($save) {
-            Mail::send('emails.ticket_created', ['ticket' => $ticket['slug']], function($message){
-                $message->from('vietanh.dev88@gmail.com', 'Laravel Ticket Manager App');
-                $message->to('wetagik475@frost2d.net')->subject('Hi! There is a new ticket created');
-                // go to https://temp-mail.org/vi for test with this email address
-            });
+            try {
+                Mail::send('emails.ticket_created', ['ticket' => $ticket['slug']], function($message){
+                    $message->from('vietanh.dev88@gmail.com', 'Laravel Ticket Manager App');
+                    $message->to('wetagik475@frost2d.net')->subject('Hi! There is a new ticket created');
+                    // go to https://temp-mail.org/vi for test with this email address
+                });
+            } catch(\Exception $e) {
+
+            }
 
             return redirect()->route('admin.tickets.index')
                 ->withMessage('Congrats! You have created a ticket successfully')
@@ -66,7 +73,7 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::where('id', $id)->with(['comments.user'])->first();
         return view('admin_default.pages.ticket_details', compact('ticket'));
     }
 

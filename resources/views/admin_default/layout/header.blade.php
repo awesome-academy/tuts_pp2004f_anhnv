@@ -72,7 +72,7 @@
                 <img src="{{ asset('_admin/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Nguyễn Việt Anh - Web Developer
+                  {{ Auth::user()->name }} - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
