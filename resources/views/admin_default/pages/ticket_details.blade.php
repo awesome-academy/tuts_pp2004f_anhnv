@@ -62,7 +62,57 @@
                     @endif
                 </div>
             </div>
+            @if (!$ticket->trashed())
+            <div class="comment-box">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3>Leave a comment</h3>
+                    </div>
+                    <div class="box-body">
+                        {!! Form::open(['route' => 'admin.comments.store', 'method' => 'POST']) !!}
+                            @csrf
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    {{ Form::textarea('content', NULL, ['class'=> 'form-control', 'rows' => 3, 'placeholder' => 'Please comment here']) }}
+                                    {{ Form::hidden('ticket_id', $ticket->id) }}
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-comment"></i> Comment</button>
+                                </div>
+                            </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
+        @if (!$ticket->trashed())
+        <div class="col-sm-6">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3>Comments</h3>
+                </div>
+                <div class="box-body box-comments">
+                    @if (count($ticket->comments) > 0) 
+                        @foreach($ticket->comments as $comment)
+                            <div class="box-comment">
+                                <img src="https://picsum.photos/30/30" alt="" class="img-circle img-sm">
+                                <div class="comment-text">
+                                    <div>
+                                        <strong class="comment_user">{{ $comment->user->name }}</strong> 
+                                        <em class="pull-right">at {{ date_format($comment->created_at, 'h:i a - d/m/Y') }}</em>
+                                    </div >
+                                    {{ $comment->content }}
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class=""><em>There is no comment in this ticket</em></p>
+                    @endif
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
 

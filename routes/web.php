@@ -34,4 +34,6 @@ Route::prefix('admin')->as('admin.')->middleware('admin_auth')->group(function()
     Route::match(['put', 'patch'], 'ticket/{ticket}/restore', 'TicketController@restore')->name('tickets.restore');
     Route::get('tickets/{ticket}/delete', 'TicketController@delete')->name('tickets.delete');
     Route::resource('tickets', 'TicketController');
+
+    Route::resource('comments', 'CommentController')->only(['store']);
 });

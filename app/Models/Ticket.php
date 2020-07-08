@@ -13,9 +13,20 @@ class Ticket extends Model
         'title',
         'content',
         'slug',
-        'status'
+        'status',
+        'user_id'
     ];
 
     use SoftDeletes;
     protected $date = ['deleted_at'];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOneThrough('App\User', Comment::class);
+    }
 }
