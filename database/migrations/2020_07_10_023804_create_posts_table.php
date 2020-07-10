@@ -21,8 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('excerpt');
             $table->text('content');
             $table->integer('views')->default(0);
-            $table->tinyInteger('status');
-            $table->smallInteger('category_id');
+            $table->tinyInteger('status')->default(0);
+            $table->smallInteger('category_id')->nullable();
         });
     }
 

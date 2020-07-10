@@ -20,7 +20,7 @@ class CreateStaffsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 100);
             $table->tinyInteger('status')->default(1);
-            $table->integer('role_id');
+            $table->integer('role_id')->default(1);
             $table->rememberToken();
         });
     }
