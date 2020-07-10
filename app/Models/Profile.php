@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    protected $table = 'profiles';
+
+    public $timestamps = false;
+    
     protected $fillable = [
         'first_name',
         'last_name',
