@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->smallInteger('id', true, true);
             $table->string('name', 60);
             $table->string('slug', 60);
-            $table->smallInteger('parent_id');
+            $table->smallInteger('parent_id')->nullable();
         });
     }
 
