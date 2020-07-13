@@ -1,0 +1,1 @@
+@extends('admin_master_def')
