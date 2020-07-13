@@ -1,0 +1,30 @@
+.navbar-custom-menu {
+    .user-menu {
+        > a.dropdown-toggle {
+            padding: 9px 0px 40px 10px;
+        }
+        img.user-image {
+            width: 36px;
+            height: 36px;
+        }
+    }
+}
+
+.main-header {
+    .breadcrumb {
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 12px;
+        background-color: transparent;
+        li, li::before, a {
+            color: #FFF;
+            font-size: 1.1em;
+            [class*=black] & {
+                color: #222;
+            }
+        }
+        li:first-of-type i {
+            margin-right: 8px;
+        }
+    }
+}
