@@ -14,4 +14,14 @@ class Category extends Model
         'name',
         'parent_id',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public static function categorySelect()
+    {
+        return static::pluck('name', 'id');
+    }
 }

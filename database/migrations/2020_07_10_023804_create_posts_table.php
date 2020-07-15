@@ -17,12 +17,13 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('image_thumb');
-            $table->string('excerpt');
-            $table->text('content');
+            $table->string('image_thumb')->nullable();
+            $table->string('excerpt')->nullable();
+            $table->text('content')->nullable();
             $table->integer('views')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->smallInteger('category_id')->nullable();
+            $table->softDeletes()->default(now());
         });
     }
 

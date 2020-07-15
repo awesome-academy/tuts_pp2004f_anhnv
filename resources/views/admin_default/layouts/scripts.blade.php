@@ -1,7 +1,4 @@
 <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {{--
 <!-- Morris.js charts -->
