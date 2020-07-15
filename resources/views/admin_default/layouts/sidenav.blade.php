@@ -21,12 +21,12 @@
         </form> --}}
         <!-- /.search form -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="active treeview">
+            <li class="treeview">
                 <a href="{{ url('admin') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
                     <span>Post</span>
@@ -35,10 +35,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-list"></i> Post List</a></li>
-                    <li><a href="#"><i class="fa fa-file-o"></i> New Post</a></li>
-                    <li><a href="#"><i class="fa fa-edit"></i> Drafts</a></li>
-                    <li><a href="#"><i class="fa fa-trash"></i> Trash</a></li>
+                    <li><a href="{{ route('admin.posts.index') }}"><i class="fa fa-list"></i> Post List</a></li>
+                    <li><a href="{{ route('admin.posts.create') }}"><i class="fa fa-file-o"></i> New Post</a></li>
+                    <li><a href="{{ route('admin.drafts.index') }}"><i class="fa fa-edit"></i> Drafts</a></li>
+                    <li><a href="{{ route('admin.drafts.trashed')}}"><i class="fa fa-trash"></i> Trash</a></li>
                 </ul>
             </li>
             <li>

@@ -1,1 +1,1 @@
-@extends('admin_master_def')
+@extends('master_admin_def')

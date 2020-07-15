@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel News | @yield('title')</title>
+    <title>Laravel News @yield('title')</title>
     @include('admin_default.layouts.head')
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -20,7 +20,11 @@
         </div>
 
         @include('admin_default.layouts.control_sidebar')
-        @include('admin_default.layouts.scripts')
     </div>
+@include('admin_default.layouts.scripts')
+
+@if(session()->has('message'))
+    @include('admin_default.partials.message')
+@endif
 </body>
 </html>

@@ -25,4 +25,9 @@ class Staff extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function post()
+    {
+        return $this->belongsToMany(Post::class)->withPivot('post_id', 'staff_id');
+    }
 }

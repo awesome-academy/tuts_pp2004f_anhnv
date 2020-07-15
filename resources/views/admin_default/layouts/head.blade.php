@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/Ionicons/css/ionicons.min.css') }}">
 <link rel="stylesheet" href="{{ asset('_admin/css/admin.css') }}">
 <link rel="stylesheet" href="{{ asset('_admin/css/admin_skins.css') }}">
+@stack('styles')
 <link rel="stylesheet" href="{{ asset('_admin/css/app.css') }}">
 
 {{-- 
@@ -19,7 +20,7 @@
 <!-- bootstrap wysihtml5 - text editor -->
 <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 --}}
-@stack('styles')
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

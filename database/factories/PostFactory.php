@@ -12,5 +12,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'image_thumb' => $faker->imageUrl,
         'excerpt' => $faker->sentences(2, true),
         'content' => $faker->paragraphs(10, true),
+        'deleted_at' =>now(),
     ];
 });

@@ -11,6 +11,5 @@ $factory->define(PostStaff::class, function (Faker $faker) {
         'staff_id' => $faker->randomElement(\DB::table('staffs')->pluck('id')),
         'event' => $faker->numberBetween(1,4),
         'happened_at' => now(),
-        'deleted_at' => now()
     ];
 });
