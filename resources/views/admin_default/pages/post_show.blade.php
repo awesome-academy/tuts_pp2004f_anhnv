@@ -10,9 +10,6 @@
                     <h3 class="box-title">Post Details</h3>
                 </div>
                 <div class="box-body">
-                    @empty(!$errors->first())
-                        @include('admin_default.partials.error')    
-                    @endempty
                     {!! Form::open(['route' => [$route, $post->id], 'method' => 'PATCH']) !!}
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             {!! Form::label('Post Title') !!}
