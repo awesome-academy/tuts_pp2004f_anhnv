@@ -3,7 +3,7 @@
     <strong>
         Oops! Something is wrong!
         <div>
-            {{ $errors->first() }}
+            @yield('error')
         </div>
     </strong>
 </div>

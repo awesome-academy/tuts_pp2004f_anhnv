@@ -94,7 +94,11 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <form action="{{ route('admin.logout') }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-default btn-flat">Sign Out</button>
+                                </form>
                             </div>
                         </li>
                     </ul>

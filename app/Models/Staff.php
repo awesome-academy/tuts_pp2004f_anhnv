@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Staff extends Model
+class Staff extends Authenticatable
 {
+    use Notifiable;
+    
     protected $table = 'staffs';
 
     public $timestamps = false;
@@ -25,6 +29,8 @@ class Staff extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $guard = 'admin';
 
     public function post()
     {

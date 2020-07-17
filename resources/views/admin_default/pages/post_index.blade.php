@@ -10,9 +10,6 @@
                     <h3 class="box-title">Post List</h3>
                 </div>
                 <div class="box-body">
-                    @empty(!$errors->first())
-                        @include('admin_default.partials.error')    
-                    @endempty
                     <table id="post_list" class="table table-bordered table-hover dataTable" style="width:100%">
                         <thead>
                             <tr>

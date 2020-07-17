@@ -10,4 +10,9 @@ class AdminController extends Controller
     {
         return view('admin_default.pages.index');
     }
+
+    public function page404()
+    {
+        return view('admin_default.pages.404');
+    }
 }
