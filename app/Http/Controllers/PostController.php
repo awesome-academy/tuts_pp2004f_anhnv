@@ -10,16 +10,20 @@ use App\Models\Category;
 
 class PostController extends Controller
 {
+    protected $breadcrumb = ['posts' => 'Post'];
+
     public function index()
     {
         $posts = Post::take(30)->get();
-        return view('admin_default.pages.post_index', compact('posts'));
+        $breadcrumb = parent::breadcrumb('List');
+        return view('admin_default.pages.post_index', compact('posts', 'breadcrumb'));
     }
 
     public function create()
     {
         $categories = Category::categorySelect();
-        return view('admin_default.pages.post_create', compact('categories'));
+        $breadcrumb = parent::breadcrumb('Create');
+        return view('admin_default.pages.post_create', compact('categories', 'breadcrumb'));
     }
 
     public function store(FormDraftRequest $request)
@@ -43,7 +47,8 @@ class PostController extends Controller
     {
         $post = POST::find($id);
         $route = 'admin.posts.unpublish';
-        return view('admin_default.pages.post_show', compact('post', 'route'));
+        $breadcrumb = parent::breadcrumb('Details');
+        return view('admin_default.pages.post_show', compact('post', 'route', 'breadcrumb'));
     }
 
     public function unpublish(Request $request, $id)

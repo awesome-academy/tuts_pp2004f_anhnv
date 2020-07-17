@@ -8,7 +8,7 @@
 <div class="custom-login-box">
     <h4 class="text-center">Welcome to Admin system</h4>
     <div class="login-logo">
-        <a href="{{ url('/') }}" style="color: #286db5">Laravel <b>News</b></a>
+        <a href="{{ url('/') }}" style="color: #f39c12">Laravel <b>News</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-warning btn-lg btn-block btn-flat">Sign In</button>
                 </div>
             </div>
         </form>
@@ -65,22 +65,25 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('vendor/iCheck/square/blue.css') }}">
+<link rel="stylesheet" href="{{ asset('vendor/iCheck/square/yellow.css') }}">
 <style>
-    body {
+    body.login-page {
         font-size: 16px;
+        background-color: #282828;
     }
 
     .custom-login-box {
         width: 480px;
         margin: 8% auto;
+        color: #ccc;
     }
 
     .login-box-body {
-        box-shadow: 0 5px 5px rgba(0, 0, 0, .3);
+        background: #1c1c1c;
+        color: #ccc;
     }
 
-    form+div {
+    form + div {
         margin-top: 20px;
     }
 
@@ -88,8 +91,22 @@
         margin-right: 10px;
     }
 
+    .login-box-body input.form-control {
+        background-color: #282828;
+        border: 1px solid #222;
+        color: #DDD;
+    }
+
+    .login-box-body input.form-control:focus {
+        background-color: #FFF;
+        color: #111;
+    } 
+
     a>i {
         margin-right: 8px;
+    }
+    a {
+        color: #f39c12;
     }
 
 </style>
@@ -100,8 +117,8 @@
 <script>
     $(function() {
         $('input[type=checkbox]').iCheck({
-            checkboxClass: 'icheckbox_square-blue'
-            , radioClass: 'iradio_square-blue'
+            checkboxClass: 'icheckbox_square-yellow'
+            , radioClass: 'iradio_square-yellow'
             , increaseArea: '20%' /* optional */
         });
     });

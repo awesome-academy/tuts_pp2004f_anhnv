@@ -18,17 +18,37 @@ textarea {
     .breadcrumb {
         display: inline-block;
         margin-bottom: 0;
-        padding: 12px;
+        padding: 14px;
         background-color: transparent;
-        li, li::before, a {
-            color: #FFF;
-            font-size: 1.1em;
-            [class*=black] & {
-                color: #222;
+        li,
+        li::before,
+        a {
+            color: #e6e6e6;
+            font-size: 1.04em;
+            font-style: italic;
+            [class*="black"] & {
+                color: #444;
+            }
+        }
+        a:hover {
+            color: #fff;
+            [class*="black"] & {
+                color: #000;
+            }
+        }
+        li.active a {
+            font-size: 1.2em;
+            color: #fff;
+            font-style: normal;
+            [class*="black"] & {
+                color: #000;
             }
         }
         li:first-of-type i {
             margin-right: 8px;
+        }
+        > li + li::before {
+            padding: 0 0.1em;
         }
     }
 }
@@ -41,11 +61,12 @@ textarea {
 
 table.dataTable {
     thead {
-        .sorting_asc, .sorting_desc {
-            box-shadow: 0 -2px #12b5e6!important;
+        .sorting_asc,
+        .sorting_desc {
+            box-shadow: 0 -2px #12b5e6 !important;
         }
-        th[class*=sorting]::after {
-            font-family: 'FontAwesome' !important;
+        th[class*="sorting"]::after {
+            font-family: "FontAwesome" !important;
         }
         .sorting::after {
             content: "\f0dc";
@@ -73,13 +94,13 @@ table.dataTable {
     top: 30px;
     right: 30px;
     z-index: 1500;
-    
+
     .message {
         outline: none;
     }
     .message.fade {
         transform: translateY(0);
-        transition: opacity .3s ease-out, transform .5s ease-out;
+        transition: opacity 0.3s ease-out, transform 0.5s ease-out;
         &.in {
             transform: translateY(30px);
         }

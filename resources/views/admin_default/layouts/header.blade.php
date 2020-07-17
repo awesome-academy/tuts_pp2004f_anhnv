@@ -13,7 +13,13 @@
 
         <ol class="breadcrumb">
             <li><a href="{{ url('admin') }}"><i class="fa fa-home"></i> Dashboard</a></li>
-            <li class="active">Post</li>
+            @if (isset($breadcrumb))
+                @foreach ($breadcrumb as $key => $value)    
+                    <li @if ($loop->last) class="active" @endif>
+                        <a @if(!empty($key)) href="{{ url("admin/$key") }}" @endif>{{ $value }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ol>
 
         <div class="navbar-custom-menu">

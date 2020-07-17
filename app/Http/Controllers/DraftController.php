@@ -11,6 +11,8 @@ use App\Models\Staff;
 
 class DraftController extends Controller
 {
+    protected $breadcrumb = ['drafts' => 'Draft'];
+
     public function index()
     {
         $posts = Post::onlyTrashed()->where('status', POST::STT_DRAFT)->orderBy('id', 'desc')->paginate(30);
@@ -20,7 +22,8 @@ class DraftController extends Controller
                 $query->wherePivot('event', POST::E_CREATE);
         }
         ]);
-        return view('admin_default.pages.post_index', compact('posts'));
+        $breadcrumb = parent::breadcrumb('List');
+        return view('admin_default.pages.post_index', compact('posts', 'breadcrumb'));
     }
 
     public function show($id)
@@ -28,14 +31,19 @@ class DraftController extends Controller
         $post = Post::onlyTrashed()->find($id);
         $post->load('category:id,name');
         $route = $post->is_deleted() ? 'admin.drafts.trashed_update': 'admin.drafts.publish';
-        return view('admin_default.pages.post_show', compact('post', 'route'));
+        if ($post->is_deleted()) {
+            $this->breadcrumb = ['drafts/trashed' => 'Trashed'];
+        }
+        $breadcrumb = parent::breadcrumb('Details');
+        return view('admin_default.pages.post_show', compact('post', 'route', 'breadcrumb'));
     }
 
     public function edit($id)
     {
         $post = Post::onlyTrashed()->find($id);
         $categories = Category::categorySelect();
-        return view('admin_default.pages.post_edit', compact('post', 'categories'));
+        $breadcrumb = parent::breadcrumb('Edit');
+        return view('admin_default.pages.post_edit', compact('post', 'categories', 'breadcrumb'));
     }
 
     public function update(FormDraftRequest $request, $id)
@@ -88,7 +96,9 @@ class DraftController extends Controller
     public function trashedIndex()
     {
         $posts = POST::onlyTrashed()->where('status', POST::STT_DELETED)->paginate(50);
-        return view('admin_default.pages.post_index', compact('posts'));        
+        $this->breadcrumb = ['drafts/trashed' => "Trashed"];
+        $breadcrumb = parent::breadcrumb('List');
+        return view('admin_default.pages.post_index', compact('posts', 'breadcrumb'));        
     }
 
     public function trash($id)

@@ -10,4 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $breadcrumb = [];
+
+    protected function breadcrumb($input)
+    {
+        array_push($this->breadcrumb, $input);
+        return $this->breadcrumb;
+    }
 }
