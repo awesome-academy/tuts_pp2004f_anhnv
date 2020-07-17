@@ -1,13 +1,13 @@
 @extends('master_admin_def')
 
-@section('title', '| Post List')
+@section('title', "| " . Arr::first($breadcrumb). " List")
 
 @section('content')
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-default">
                 <div class="box-header">
-                    <h3 class="box-title">Post List</h3>
+                    <h3 class="box-title">{{ Arr::first($breadcrumb) }} List</h3>
                 </div>
                 <div class="box-body">
                     <table id="post_list" class="table table-bordered table-hover dataTable" style="width:100%">

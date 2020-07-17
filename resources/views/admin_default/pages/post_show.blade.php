@@ -1,13 +1,13 @@
 @extends('master_admin_def')
 
-@section('title', '| Draft Details')
+@section('title', '| '. Arr::first($breadcrumb) . ' Details')
 
 @section('content')
     <div class="row">
         <div class="col-sm-6">
             <div class="box box-default">
                 <div class="box-header">
-                    <h3 class="box-title">Post Details</h3>
+                    <h3 class="box-title">{{ Arr::first($breadcrumb) }} Details</h3>
                 </div>
                 <div class="box-body">
                     {!! Form::open(['route' => [$route, $post->id], 'method' => 'PATCH']) !!}
